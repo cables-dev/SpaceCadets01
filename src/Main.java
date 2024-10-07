@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Optional;
+import java.util.*;
 
 public class Main {
     private static Optional<String> FindNameForId(String user_id) {
@@ -31,9 +28,9 @@ public class Main {
 
     // Very basic input sanitation
     private static Boolean IsValidUserId(String user_id) {
-        final String[] invalid_chars = {"#", "!", "/", "\\", " ", ":", "."};
-        for (String ch : invalid_chars) {
-            if (user_id.contains(ch)) {
+        final Set<Character> invalid_chars = new HashSet<Character>(Arrays.asList('#', '!', '/', '\\', ' ', ':', '.'));
+        for (Character ch : user_id.toCharArray()) {
+            if (invalid_chars.contains(ch)) {
                 return false;
             }
         }
