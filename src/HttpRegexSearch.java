@@ -64,10 +64,12 @@ public class HttpRegexSearch {
 
     public ArrayList<String> Execute() throws IOException, InterruptedException {
         Optional<HttpRequest> req = CreateRequest();
+        // Return early if we could not create a valid request
         if (req.isEmpty())
             return new ArrayList<>();
 
         HttpClient client = GetHttpClient();
+        // Send our web request and wait for response
         HttpResponse<String> response = client.send(req.get(), HttpResponse.BodyHandlers.ofString());
         client.close();
         return ApplyRegex(response.body());

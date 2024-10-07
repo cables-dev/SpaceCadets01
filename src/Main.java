@@ -5,10 +5,12 @@ import java.util.Optional;
 
 public class Main {
     private static Optional<String> FindNameForId(String user_id) {
+        // Specify aforementioned target urls
+        // https://www.southampton.ac.uk/ can deal with new-style ids such as "5x82lq"
+        // https://www.ecs.soton.ac.uk/ can deal with old-style ids such as "dem"
+        final String[] search_targets = {"https://www.ecs.soton.ac.uk/people/", "https://www.southampton.ac.uk/people/"};
         // We use the same regex expression for all url targets
         final String regex = "(?<=<h1 class=\"heading-m inline-block text-prussianDark\">)(.*)(?=</h1>)";
-        // Specify aforementioned target urls
-        final String[] search_targets = {"https://www.ecs.soton.ac.uk/people/", "https://www.southampton.ac.uk/people/"};
 
         for (String url_base : search_targets) {
             String full_url = url_base + user_id;                       // Construct full url with user's id
